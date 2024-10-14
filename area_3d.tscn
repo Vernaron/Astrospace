@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dm1juhm82ki31"]
+
+[ext_resource type="Shader" path="res://area_3d.gdshader" id="1_ho0w6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s1vs3"]
+radius = 0.66
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ldhnt"]
+render_priority = 0
+shader = ExtResource("1_ho0w6")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o32e4"]
+material = SubResource("ShaderMaterial_ldhnt")
+
+[node name="Area3D" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_s1vs3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_o32e4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.998274, -0.0144838, -0.0569176, -0.0179462, 0.997989, 0.0607987, 0.0559225, 0.0617152, -0.996526, -0.522111, 0.0713731, -2.49577)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -0.076093, 0.027651, -2.24329)
+spot_attenuation = 0.217638

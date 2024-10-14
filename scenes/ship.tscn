@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://waapexo08dc8"]
+
+[ext_resource type="Script" path="res://scenes/ship.gd" id="1_sfc0k"]
+[ext_resource type="Texture2D" uid="uid://dmtc0u3xt6eto" path="res://icon.svg" id="3_6g8gd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k24pw"]
+size = Vector2(134, 130)
+
+[node name="Node2D" type="RigidBody2D"]
+input_pickable = true
+gravity_scale = 0.0
+script = ExtResource("1_sfc0k")
+Functions = Array[String](["Hail"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_k24pw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_6g8gd")

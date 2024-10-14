@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://pw74yebe4kvj"]
+
+[ext_resource type="Script" path="res://scripts/map.gd" id="1_gwbcv"]
+[ext_resource type="PackedScene" uid="uid://waapexo08dc8" path="res://scenes/ship.tscn" id="2_apweq"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_gwbcv")
+
+[node name="Player" parent="." instance=ExtResource("2_apweq")]
+position = Vector2(-249, -78)
+Functions = null
+
+[node name="Camera2D" type="Camera2D" parent="."]
