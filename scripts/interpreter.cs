@@ -14,6 +14,7 @@ public partial class interpreter : Node2D
 	public enum FunctionType{
 		Null, Add, Sub, Mul, Div, Step, Var, Static
 	}
+	//parent class for the Alg
 	public class DataObj{
 			
 		public void setVal(float _val){val = _val;}
@@ -21,6 +22,7 @@ public partial class interpreter : Node2D
 		protected float val;
 		protected DataObj(float newVal){val = newVal;}
 	}
+	//class that represents component functions
 	public class Alg : DataObj{
 		public Alg(string _name) : base(0)
 		{
@@ -30,30 +32,36 @@ public partial class interpreter : Node2D
 		public Alg(FunctionType _type, string _name) : this(_name){
 			type = _type;
 		}
+		//recalculates the values of all algs that come after
 		public void recalculate()
 		{
 			foreach(Alg target in targets){
 				target.calculate();
 			}	
 		}
-		public void addTarget(Alg _target){
+		//binds this alg to another alg's var list
+		//and another alg to this alg's target list
+		public void connectAlgs(Alg _target){
 			targets.Add(_target);
+			_target.addVar(this);
 		}
 		public void addVar(Alg _var){
 			vars.Add(_var);
 		}
 		public string getName(){return name;}
 		//performs the calculation for the algorithm depending on the type
+		//the type being dictated by the type variable
 		public void calculate()
 		{
 			switch(type){
+				//does nothing
 				case FunctionType.Null:
 					val = 0;
 					break;
+				//functions as simple value storage
 				case FunctionType.Var:
 					if(vars.Count>0&&val!=vars[0].getVal()){
 						val = vars[0].getVal();
-						
 						recalculate();
 					}
 					break;
@@ -65,6 +73,7 @@ public partial class interpreter : Node2D
 					break;
 				case FunctionType.Sub:
 					break;
+				//functions as a static value
 				case FunctionType.Static:
 					recalculate();
 					break;
@@ -90,25 +99,20 @@ public partial class interpreter : Node2D
 		 public void addOutput(Alg new_output){
 			algOutputs.Add(new_output);
 		 }
+		//connects another component's specified input alg to the
+		//specified output alg on this component
 		public void connectInput(Component comp, string input_name, string output_name){
-			if(comp.getInput(input_name)!=null){
-				foreach(Alg output in algOutputs){
-					if (output.getName()==output_name){
-						output.addTarget(comp.getInput(input_name));
-						comp.getInput(input_name).addVar(output);
-					}
-				}
+			Alg input = comp.getInput(input_name);
+			if(input!=null){
+				algOutputs.Find(x=>x.getName()==output_name)
+					.connectAlgs(input);
 			}
 		}
 		public Alg getInput(string _name){
-			foreach(Alg input in algInputs){
-				if(input.getName()==_name){
-					return input;
-				}
-			}
-			return null;
+			return algInputs.Find(x=>x.getName()==_name);
 		}
 	}
+	//Input type of componenet. Used for interfacing with other systems
 	public class InputMask : Component{
 		OutputMask output;
 		bool isStarter = false;
@@ -122,6 +126,7 @@ public partial class interpreter : Node2D
 			}
 		}
 	}
+	//Output type of a component. used for interfacing with other systems
 	public class OutputMask : Component{
 
 	}
