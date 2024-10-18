@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public partial class interpreter : Node2D
 {
 	[Export]
+	Dictionary<string, float> values = new Dictionary<string, float>();
 	float Frequency = 1;
 	float delay;
 	float currDelay;
@@ -128,7 +129,10 @@ public partial class interpreter : Node2D
 	}
 	//Output type of a component. used for interfacing with other systems
 	public class OutputMask : Component{
-
+		string output;
+		public void linkOutput( string _output){
+			output = _output;
+		}
 	}
 	public Component tempComp;
 	// Called when the node enters the scene tree for the first time.
