@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/center.gd" id="1_n6j3d"]
 [ext_resource type="PackedScene" uid="uid://pw74yebe4kvj" path="res://scenes/map.tscn" id="2_j5h7o"]
-[ext_resource type="Script" path="res://scripts/interpreter.cs" id="3_tnvi2"]
+[ext_resource type="Script" path="res://scripts/Interpreter.cs" id="3_5ek8c"]
 
 [node name="Center" type="Node2D"]
 script = ExtResource("1_n6j3d")
@@ -10,4 +10,4 @@ script = ExtResource("1_n6j3d")
 [node name="Map" parent="." instance=ExtResource("2_j5h7o")]
 
 [node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("3_tnvi2")
+script = ExtResource("3_5ek8c")
