@@ -9,3 +9,4 @@ using System;
 		protected float val;
 		protected DataObj(float newVal){val = newVal;}
 	}
+	
