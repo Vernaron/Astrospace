@@ -38,6 +38,12 @@ primary_select={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player stuff..."
+2d_physics/layer_2="enemy stuff..."
+2d_physics/layer_3="wall stuff..."
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
